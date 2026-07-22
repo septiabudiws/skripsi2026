@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <form action="#" method="POST">
-                    <!-- Nanti tambahkan @csrf di sini -->
+                    @csrf
 
                     <div class="mb-3">
                         <label class="form-label">Nama Menu</label>
@@ -23,7 +23,6 @@
                         <input type="number" class="form-control" name="hpp" placeholder="HPP">
                     </div>
 
-                    <!-- Tombol di kiri sesuai gambar -->
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

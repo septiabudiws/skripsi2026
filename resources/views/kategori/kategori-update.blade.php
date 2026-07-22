@@ -5,7 +5,9 @@
                 <h4 class="mb-0">Edit Kategori</h4>
             </div>
             <div class="card-body">
-                <form>
+                <form action="#" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="mb-3"><label class="form-label">Nama Kategori</label><input type="text" class="form-control"
                             placeholder="Nama Kategori"></div>
                     <button type="submit" class="btn btn-warning">Simpan</button>

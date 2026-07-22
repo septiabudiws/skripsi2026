@@ -6,7 +6,8 @@
             </div>
             <div class="card-body">
                 <form action="#" method="POST">
-                    <!-- Nanti tambahkan @csrf dan @method('PUT') di sini -->
+                    @csrf
+                    @method('PUT')
 
                     <div class="mb-3">
                         <label class="form-label">Nama Menu</label>

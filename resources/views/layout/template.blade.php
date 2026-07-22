@@ -46,27 +46,7 @@
             </div><!-- [ Main Content ] end -->
         </div>
     </div><!-- [ Main Content ] end -->
-    <footer class="pc-footer">
-        <div class="footer-wrapper container-fluid">
-            <div class="row">
-                <div class="col-sm-6 my-1">
-                    <p class="m-0">Made with &#9829; by Team <b>Septiabudi WS</b> & Powered by <a
-                            href="https://codedthemes.com/" target="_blank">CodedThemes</a></p>
-                </div>
-                <div class="col-sm-6 ms-auto my-1">
-                    <ul class="list-inline footer-link mb-0 justify-content-sm-end d-flex">
-                        <li class="list-inline-item"><a
-                                href="https://html.phoenixcoded.net/light-able/bootstrap/default/index.html">Home</a>
-                        </li>
-                        <li class="list-inline-item"><a href="https://pcoded.gitbook.io/light-able/"
-                                target="_blank">Documentation</a></li>
-                        <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/"
-                                target="_blank">Support</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <x-footer></x-footer>
     <x-script></x-script>
     @stack('script')
 </body><!-- [Body] end -->
