@@ -30,3 +30,14 @@ Route::get('/menu/edit', function (){
     return view('menu.menu-update');
 });
 
+Route::get('/kriteria', function (){
+    return view('kriteria.kriteria');
+});
+
+Route::get('/kriteria/create', function (){
+    return view('kriteria.kriteria-create');
+});
+
+Route::get('/kriteria/edit', function (){
+    return view('kriteria.kriteria-update');
+});

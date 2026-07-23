@@ -20,9 +20,11 @@
                 <li class="pc-item"><a href="/menu" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-article-medium"></i>
                         </span><span class="pc-mtext" data-i18n="Statistics">Menu</span></a></li>
-                <li class="pc-item"><a
-                        href="#"
-                        class="pc-link"><span class="pc-micon"><i class="ph-duotone ph-identification-card"></i>
+                <li class="pc-item"><a href="/kriteria" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-align-center-vertical"></i>
+                        </span><span class="pc-mtext" data-i18n="Statistics">Kriteria</span></a></li>
+                <li class="pc-item"><a href="#" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-identification-card"></i>
                         </span><span class="pc-mtext" data-i18n="User">Karyawan</span></a></li>
                 <li class="pc-item pc-caption"><label data-i18n="Widget">Widget</label> <i
                         class="ph-duotone ph-chart-pie"></i></li>
