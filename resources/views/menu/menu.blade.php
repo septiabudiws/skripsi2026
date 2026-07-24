@@ -14,30 +14,31 @@
                                 <th>Nama Menu</th>
                                 <th>Harga Jual</th>
                                 <th>HPP</th>
+                                <th>Margin Profit</th>
                                 <th style="width: 20%; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="text-align: center;">1</td>
-                                <td>Mie Instan Telur 2 Sawi</td>
-                                <td>Rp 15.000</td>
-                                <td>Rp 8.000</td>
-                                <td style="text-align: center;">
-                                    <a href="/menu/edit" class="btn btn-warning btn-sm me-1">Update</a>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">2</td>
-                                <td>Kopi Hitam</td>
-                                <td>Rp 5.000</td>
-                                <td>Rp 2.500</td>
-                                <td style="text-align: center;">
-                                    <a href="/menu/edit" class="btn btn-warning btn-sm me-1">Update</a>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
+                            @foreach ($menu as $item)
+                                <tr>
+                                    <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>@rupiah($item->harga)</td>
+                                    <td>@rupiah($item->hpp)</td>
+                                    <td>{{ round($item->margin_profit * 100) }}%</td>
+                                    <td style="text-align: center;">
+                                        <a href="{{ route('menu.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm me-1">Update</a>
+                                        <form action="{{ route('menu.destroy', $item->id) }}" method="POST"
+                                            class="d-inline" id="delete-form-{{ $item->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="confirmDelete({{ $item->id }})">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -50,6 +51,23 @@
         $(document).ready(function() {
             $('#tabelMenu').DataTable();
         });
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data menu ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
     </script>
     @endpush
 </x-template>

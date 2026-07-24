@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">Manajemen Kategori</h4>
-                <a href="/kategori/create" class="btn btn-primary btn-sm">Tambah Kategori</a>
+                <a href="{{ route('kategori.create') }}" class="btn btn-primary btn-sm">Tambah Kategori</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -17,35 +17,55 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="text-align: center;">1</td>
-                                <td>Makanan Utama</td>
-                                <td>45</td>
-                                <td style="text-align: center;">
-                                    <a href="/kategori/edit" class="btn btn-warning btn-sm me-1">Update</a>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">2</td>
-                                <td>Minuman Dingin</td>
-                                <td>120</td>
-                                <td style="text-align: center;">
-                                    <a href="/kategori/edit" class="btn btn-warning btn-sm me-1">Update</a>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
+                            @foreach ($kategori as $item)
+                                <tr>
+                                    <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama_kategori }}</td>
+                                    <td>{{ $item->menu_count }}</td>
+                                    <td style="text-align: center;">
+                                        <a href="{{ route('kategori.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm me-1">Update</a>
+                                        <form action="{{ route('kategori.destroy', $item->id) }}" method="POST"
+                                            class="d-inline" id="delete-form-{{ $item->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="confirmDelete({{ $item->id }})">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
     @push('script')
         <script>
             $(document).ready(function() {
                 $('#tabelData').DataTable();
             });
+
+            function confirmDelete(id) {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data kategori ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    // Jika user mengklik "Ya, hapus!"
+                    if (result.isConfirmed) {
+                        // Jalankan proses submit pada form yang sesuai dengan ID
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+            }
         </script>
     @endpush
 </x-template>

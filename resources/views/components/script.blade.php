@@ -16,6 +16,8 @@
     <script src="{{ asset('able') }}/assets/js/multi-lang.js"></script>
     <script src="{{ asset('able') }}/assets/js/plugins/feather.min.js"></script>
 
+    <script src="{{ asset('able') }}/assets/js/sweetalert2.all.min.js"></script>
+
     <script src="{{ asset('able') }}/assets/js/jquery.min.js"></script>
 
     <script src="{{ asset('able') }}/assets/js/datatables.min.js"></script>
@@ -42,3 +44,23 @@
         integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ=="
         data-cf-beacon='{"version":"2024.11.0","token":"5980a2e1ef494261848acf01dd801766","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
         crossorigin="anonymous"></script>
+
+    <script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: '{{ session('error') }}',
+        });
+    @endif
+</script>
