@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">Manajemen Kriteria</h4>
-                <a href="/kriteria/create" class="btn btn-primary btn-sm">Tambah Kriteria</a>
+                <a href="{{ route('kriteria.create') }}" class="btn btn-primary btn-sm">Tambah Kriteria</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,26 +18,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="text-align: center;">1</td>
-                                <td>C1</td>
-                                <td>Makanan Utama</td>
-                                <td>45</td>
-                                <td style="text-align: center;">
-                                    <a href="/kriteria/edit" class="btn btn-warning btn-sm me-1">Update</a>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">2</td>
-                                <td>C2</td>
-                                <td>Minuman Dingin</td>
-                                <td>120</td>
-                                <td style="text-align: center;">
-                                    <a href="/kriteria/edit" class="btn btn-warning btn-sm me-1">Update</a>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
+                            @foreach ($kriteria as $item)
+                                <tr>
+                                    <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                    <td>{{ $item->kode_kriteria }}</td>
+                                    <td>{{ $item->nama_kriteria }}</td>
+                                    <td>{{ $item->bobot_kriteria }}</td>
+                                    <td style="text-align: center;">
+                                        <a href="{{ route('kriteria.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('kriteria.destroy', $item->id) }}" method="POST"
+                                            class="d-inline" id="delete-form-{{ $item->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="confirmDelete({{ $item->id }})">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -49,6 +48,23 @@
             $(document).ready(function() {
                 $('#tabelData').DataTable();
             });
+
+            function confirmDelete(id) {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data kriteria ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+            }
         </script>
     @endpush
 </x-template>

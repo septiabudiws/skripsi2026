@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,14 +25,13 @@ Route::get('/menu/edit/{menu}', [MenuController::class, 'edit'])->name('menu.edi
 Route::put('/menu/update/{menu}', [MenuController::class, 'update'])->name('menu.update');
 Route::delete('/menu/destroy/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
-Route::get('/kriteria', function (){
-    return view('kriteria.kriteria');
-});
+Route::get('/kriteria', [KriteriaController::class, 'index'])->name('kriteria');
+Route::get('/kriteria/create', [KriteriaController::class, 'create'])->name('kriteria.create');
+Route::post('/kriteria/store', [KriteriaController::class, 'store'])->name('kriteria.store');
+Route::get('/kriteria/edit/{kriteria}', [KriteriaController::class, 'edit'])->name('kriteria.edit');
+Route::put('/kriteria/update/{kriteria}', [KriteriaController::class, 'update'])->name('kriteria.update');
+Route::delete('/kriteria/destroy/{kriteria}', [KriteriaController::class, 'destroy'])->name('kriteria.destroy');
 
-Route::get('/kriteria/create', function (){
-    return view('kriteria.kriteria-create');
-});
-
-Route::get('/kriteria/edit', function (){
-    return view('kriteria.kriteria-update');
-});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
