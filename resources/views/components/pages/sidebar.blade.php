@@ -23,9 +23,20 @@
                 <li class="pc-item"><a href="/kriteria" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-align-center-vertical"></i>
                         </span><span class="pc-mtext" data-i18n="Statistics">Kriteria</span></a></li>
-                <li class="pc-item"><a href="#" class="pc-link"><span class="pc-micon"><i
+                <li class="pc-item"><a href="/metode" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-money"></i>
+                        </span><span class="pc-mtext" data-i18n="Statistics">Pembayaran</span></a></li>
+                <li class="pc-item"><a href="/karyawan" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-identification-card"></i>
                         </span><span class="pc-mtext" data-i18n="User">Karyawan</span></a></li>
+                <li class="pc-item pc-caption"><label data-i18n="Navigation">Kasir</label> <i
+                        class="ph-duotone ph-gauge"></i></li>
+                <li class="pc-item"><a href="/pos" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-shopping-cart-simple"></i>
+                        </span><span class="pc-mtext" data-i18n="User">POS</span></a></li>
+                <li class="pc-item"><a href="#" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-notebook"></i>
+                        </span><span class="pc-mtext" data-i18n="User">Pesanan Hari Ini</span></a></li>
                 <li class="pc-item pc-caption"><label data-i18n="Widget">Widget</label> <i
                         class="ph-duotone ph-chart-pie"></i></li>
                 <li class="pc-item"><a
