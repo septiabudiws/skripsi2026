@@ -21,20 +21,22 @@ class RolePermissionSeeder extends Seeder
         // Kita bedakan antara akses menu utama dan akses detail di dalam dashboard
         $permissions = [
             // Akses Sidebar Menu
-            'akses dashboard',
-            'akses kategori',
-            'akses menu',
-            'akses kriteria',
-            'akses karyawan',
-            'akses perankingan',
-            'akses profile',
-            'akses metode pembayaran',
+            'akses_dashboard',
+            'akses_kategori',
+            'akses_menu',
+            'akses_kriteria',
+            'akses_karyawan',
+            'akses_metode_pembayaran',
+            'akses_perankingan',
+            'akses_profile',
+            'akses_pos',
+            'transaksi_selesai',
 
             // Akses Detail di dalam Dashboard (Contoh Granular)
-            'lihat ranking menu optimal',
-            'lihat produk terlaris',
-            'lihat change password',
-            'lihat permissions',
+            'lihat_ranking_menu_optimal',
+            'lihat_produk_terlaris',
+            'lihat_change_password',
+            'lihat_permissions',
         ];
 
         // Masukkan semua permission ke dalam database
@@ -51,11 +53,12 @@ class RolePermissionSeeder extends Seeder
         // ROLE KARYAWAN: Hanya diberikan akses menu tertentu
         $roleKaryawan = Role::create(['name' => 'karyawan']);
         $roleKaryawan->givePermissionTo([
-            'akses dashboard',
-            'akses karyawan',
-            'akses profile',
+            'akses_dashboard',
+            'akses_pos',
+            'akses_profile',
+            'transaksi_selesai',
             // Misalnya karyawan boleh lihat jumlah pesanan, tapi tidak boleh lihat grafik uang
-            'lihat change password',
+            'lihat_change_password',
         ]);
     }
 }

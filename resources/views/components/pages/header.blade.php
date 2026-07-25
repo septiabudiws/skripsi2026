@@ -56,19 +56,25 @@
                                                     src="{{ asset('able') }}/assets/images/user/avatar-2.jpg"
                                                     alt="user-image" class="wid-50 rounded-circle"></div>
                                             <div class="flex-grow-1 mx-3">
-                                                <h5 class="mb-0">Carson Darrin</h5><a class="link-primary"
-                                                    href="https://html.phoenixcoded.net/cdn-cgi/l/email-protection#98fbf9eaebf7f6b6fcf9eaeaf1f6d8fbf7f5e8f9f6e1b6f1f7"><span
-                                                        class="__cf_email__"
-                                                        data-cfemail="c1a2a0b3b2aeafefa5a0b3b3a8af81a2aeacb1a0afb8efa8ae">[email&#160;protected]</span></a>
+                                                <h5 class="mb-0">{{ Auth::user()->name }}</h5><a class="link-primary"
+                                                    href="#">{{ Auth::user()->email }}</a>
                                             </div><span class="badge bg-primary">PRO</span>
                                         </div>
                                     </li>
-                                    <li class="list-group-item"><a href="#" class="dropdown-item"><span
+                                    <li class="list-group-item"><a href="{{ route('profile') }}" class="dropdown-item"><span
                                                 class="d-flex align-items-center"><i
                                                     class="ph-duotone ph-user-circle"></i> <span>Profile</span>
-                                            </span></a><a href="#" class="dropdown-item"><span
-                                                class="d-flex align-items-center"><i class="ph-duotone ph-power"></i>
-                                                <span>Logout</span></span></a>
+                                                <a href="#" class="dropdown-item"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    <span class="d-flex align-items-center">
+                                                        <i class="ph-duotone ph-power"></i>
+                                                        <span>Logout</span>
+                                                    </span>
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
                                     </li>
                                 </ul>
                             </div>
