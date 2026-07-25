@@ -35,3 +35,11 @@ Route::delete('/kriteria/destroy/{kriteria}', [KriteriaController::class, 'destr
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('/profile', function () {
+    return view('profile.profile');
+})->name('profile');
