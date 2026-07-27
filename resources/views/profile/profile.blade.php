@@ -94,32 +94,55 @@
                             <div class="card-header">
                                 <h5>Change Password</h5>
                             </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item px-0">
-                                        <div class="row mb-0"><label
-                                                class="col-form-label col-md-4 col-sm-12 text-md-end">New
-                                                Password <span class="text-danger">*</span></label>
-                                            <div class="col-md-8 col-sm-12"><input type="password" class="form-control">
+                            <form action="{{ route('profile.change-password') }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0">
+                                            <div class="row mb-0 align-items-center">
+                                                <label class="col-form-label col-md-4 col-sm-12 text-md-end">New
+                                                    Password <span class="text-danger">*</span></label>
+                                                <div class="col-md-8 col-sm-12">
+                                                    <div class="input-group">
+                                                        <input type="password" name="password" id="profileNewPassword"
+                                                            class="form-control @error('password') is-invalid @enderror"
+                                                            required>
+                                                        <button class="btn btn-outline-secondary" type="button"
+                                                            onclick="togglePassword('profileNewPassword', 'iconProfileNew')">
+                                                            <i id="iconProfileNew" class="ph-duotone ph-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                    @error('password')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item pb-0 px-0">
-                                        <div class="row mb-0"><label
-                                                class="col-form-label col-md-4 col-sm-12 text-md-end">Confirm
-                                                Password <span class="text-danger">*</span></label>
-                                            <div class="col-md-8 col-sm-12"><input type="password"
-                                                    class="form-control"></div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body text-end">
-                                <div class="btn btn-outline-secondary me-2">Cancel</div>
-                                <div class="btn btn-primary">Change Password</div>
-                            </div>
+                                        </li>
+                                        <li class="list-group-item pb-0 px-0">
+                                            <div class="row mb-0 align-items-center">
+                                                <label class="col-form-label col-md-4 col-sm-12 text-md-end">Confirm
+                                                    Password <span class="text-danger">*</span></label>
+                                                <div class="col-md-8 col-sm-12">
+                                                    <div class="input-group">
+                                                        <input type="password" name="password_confirmation"
+                                                            id="profileConfirmPassword" class="form-control" required>
+                                                        <button class="btn btn-outline-secondary" type="button"
+                                                            onclick="togglePassword('profileConfirmPassword', 'iconProfileConfirm')">
+                                                            <i id="iconProfileConfirm" class="ph-duotone ph-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body text-end">
+                                    <button type="button" class="btn btn-outline-secondary me-2">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     @role('admin')
@@ -134,25 +157,34 @@
                                         <div>
                                             <p class="text-muted mb-0">Akses Kategori</p>
                                         </div>
-                                        <div class="form-check form-switch p-0"><input
-                                                class="m-0 form-check-input h5 position-relative" type="checkbox"
-                                                role="switch" checked=""></div>
+                                        <div class="form-check form-switch p-0">
+                                            <input class="m-0 form-check-input h5 position-relative" type="checkbox"
+                                                role="switch"
+                                                {{ Auth::user()->hasPermissionTo('akses_kategori') ? 'checked' : '' }}
+                                                disabled>
+                                        </div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-0">
                                         <div>
                                             <p class="text-muted mb-0">Akses Menu</p>
                                         </div>
-                                        <div class="form-check form-switch p-0"><input
-                                                class="m-0 form-check-input h5 position-relative" type="checkbox"
-                                                role="switch"></div>
+                                        <div class="form-check form-switch p-0">
+                                            <input class="m-0 form-check-input h5 position-relative" type="checkbox"
+                                                role="switch"
+                                                {{ Auth::user()->hasPermissionTo('akses_menu') ? 'checked' : '' }}
+                                                disabled>
+                                        </div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-0">
                                         <div>
                                             <p class="text-muted mb-0">Akses Kriteria</p>
                                         </div>
-                                        <div class="form-check form-switch p-0"><input
-                                                class="m-0 form-check-input h5 position-relative" type="checkbox"
-                                                role="switch"></div>
+                                        <div class="form-check form-switch p-0">
+                                            <input class="m-0 form-check-input h5 position-relative" type="checkbox"
+                                                role="switch"
+                                                {{ Auth::user()->hasPermissionTo('akses_kriteria') ? 'checked' : '' }}
+                                                disabled>
+                                        </div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-0">
                                         <div>
@@ -160,7 +192,9 @@
                                         </div>
                                         <div class="form-check form-switch p-0"><input
                                                 class="m-0 form-check-input h5 position-relative" type="checkbox"
-                                                role="switch"></div>
+                                                role="switch"
+                                                {{ Auth::user()->hasPermissionTo('akses_metode_pembayaran') ? 'checked' : '' }}
+                                                disabled></div>
                                     </div>
                                 </div>
                             </div>
@@ -176,4 +210,18 @@
             </div>
         </div>
     </div><!-- [ sample-page ] end -->
+    <script>
+        function togglePassword(inputId, iconId) {
+            let inputField = document.getElementById(inputId);
+            let iconElement = document.getElementById(iconId);
+
+            if (inputField.type === 'password') {
+                inputField.type = 'text';
+                iconElement.className = 'ph-duotone ph-eye-slash';
+            } else {
+                inputField.type = 'password';
+                iconElement.className = 'ph-duotone ph-eye';
+            }
+        }
+    </script>
 </x-template>

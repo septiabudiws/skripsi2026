@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">Point of Sale</h4>
-                <a href="#" class="btn btn-primary btn-sm">Transaksi</a>
+                <a href="#" class="btn btn-primary btn-sm">Pesanan</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -68,7 +68,7 @@
                         <hr>
                         <div class="d-flex justify-content-between mb-3">
                             <h5 class="fw-bold mb-0">TOTAL</h5>
-                            <h5 class="fw-bold mb-0 text-primary">Rp 34.000</h5>
+                            <h5 class="fw-bold mb-0 text-primary" id="totalHargaLayout">Rp 0</h5>
                         </div>
                         <button class="btn btn-success w-100 mb-2 fw-bold" data-bs-toggle="modal"
                             data-bs-target="#modalPembayaran" onclick="siapkanModal()">

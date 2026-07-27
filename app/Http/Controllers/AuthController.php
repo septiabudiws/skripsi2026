@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -51,4 +54,23 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login');
     }
+
+    public function register(){
+
+        return view('auth.register');
+    }
+
+    public function registerStore(RegisterRequest $request){
+
+    $user = User::create([
+        'name'     => $request->name,
+        'username' => $request->username,
+        'email'    => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    $user->assignRole('karyawan');
+
+    return redirect()->route('login')->with('success', 'Registrasi berhasil! Akun Anda sedang berstatus nonaktif.');
+}
 }

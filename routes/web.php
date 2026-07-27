@@ -14,6 +14,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register/store', [AuthController::class, 'registerStore'])->name('register.store');
 });
 
 Route::middleware(['auth'])->group(function (){
@@ -26,10 +27,13 @@ Route::get('/profile', function () {
     return view('profile.profile');
 })->name('profile');
 
+Route::put('/profile/change-password', [UserController::class, 'changePassword'])->name('profile.change-password');
+
 Route::middleware(['role:admin'])->group(function (){
     Route::get('/karyawan', [UserController::class, 'index'])->name('karyawan');
 
     Route::patch('/karyawan/{id}/status', [UserController::class, 'updateStatus'])->name('karyawan.update-status');
+    Route::put('/karyawan/{id}/permissions', [UserController::class, 'updatePermissions'])->name('karyawan.update-permissions');
 });
 
 Route::middleware(['permission:akses_kategori'])->group(function (){
