@@ -15,6 +15,11 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/store', [AuthController::class, 'registerStore'])->name('register.store');
+
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('password.reset');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::post('/reset-password', [AuthController::class, 'updateResetPassword'])->name('password.update');
 });
 
 Route::middleware(['auth'])->group(function (){

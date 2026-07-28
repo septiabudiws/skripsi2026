@@ -10,6 +10,13 @@
                         Account</a></p>
             </div>
 
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <form action="{{ route('login.post') }}" method="POST">
                 @csrf
                 @error('email')
@@ -34,7 +41,7 @@
                 </div>
 
                 <div class="d-flex mt-1 justify-content-between align-items-center">
-                    <a href="#">
+                    <a href="{{ route('forgot-password') }}">
                         <h6 class="f-w-400 mb-0">Forgot Password?</h6>
                     </a>
                 </div>
