@@ -80,6 +80,8 @@ Route::middleware(['permission:akses_metode_pembayaran'])->group(function (){
 
 Route::middleware(['permission:akses_pos'])->group(function (){
     Route::get('/pos', [TransaksiController::class, 'index'])->name('pos');
+    Route::post('/pos/store', [TransaksiController::class, 'store'])->name('pos.store');
+    Route::get('/transaksi/hari-ini', [TransaksiController::class, 'hariIni'])->name('transaksi.hari-ini');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

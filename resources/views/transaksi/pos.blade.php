@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">Point of Sale</h4>
-                <a href="#" class="btn btn-primary btn-sm">Pesanan</a>
+                <a href="{{ route('transaksi.hari-ini') }}" class="btn btn-primary btn-sm">Pesanan</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -56,7 +56,8 @@
                             <select id="inputMetodeBayar" class="form-select form-select-sm">
                                 @foreach ($metodePembayaran as $metode)
                                     <!-- Kita gunakan strtolower agar value-nya huruf kecil semua (contoh: 'tunai', 'qris') -->
-                                    <option value="{{ strtolower($metode->nama_metode) }}">
+                                    <option value="{{ $metode->id }}"
+                                        data-nama="{{ strtolower($metode->nama_metode) }}">
                                         {{ $metode->nama_metode }}
                                     </option>
                                 @endforeach
@@ -100,14 +101,12 @@
 
                         <hr>
 
-                        <!-- ID listPesananModal ditambahkan di sini, isinya dikosongkan -->
                         <ul class="list-unstyled mb-3 small" id="listPesananModal"></ul>
 
                         <hr>
 
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="fw-bold mb-0">Total Tagihan</h5>
-                            <!-- ID totalTagihanModal ditambahkan di sini -->
                             <h5 class="fw-bold mb-0 text-primary" id="totalTagihanModal">Rp 0</h5>
                         </div>
 
@@ -125,7 +124,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-success fw-bold">Simpan Transaksi</button>
+                        <button type="button" class="btn btn-success fw-bold" onclick="prosesTransaksi()">Simpan
+                            Transaksi</button>
                     </div>
                 </div>
             </div>
@@ -225,7 +225,8 @@
             }
 
             let nama = document.getElementById('inputNamaCustomer').value;
-            let metode = document.getElementById('inputMetodeBayar').value;
+            let selectElement = document.getElementById('inputMetodeBayar');
+            let metode = selectElement.options[selectElement.selectedIndex].getAttribute('data-nama');
 
             document.getElementById('displayNamaCustomer').innerText = nama ? nama : 'Umum (Tanpa Nama)';
             document.getElementById('displayMetodeBayar').innerText = metode;
@@ -281,6 +282,112 @@
             keranjang = {};
             document.getElementById('inputNamaCustomer').value = '';
             renderKeranjang();
+        }
+
+        function prosesTransaksi() {
+            if (Object.keys(keranjang).length === 0) {
+                alert("Keranjang masih kosong!");
+                return;
+            }
+
+            let selectElement = document.getElementById('inputMetodeBayar');
+            let metodeId = selectElement.value;
+            let namaCustomer = document.getElementById('inputNamaCustomer').value;
+            let uangBayar = parseInt(document.getElementById('inputUangBayar').value) || 0;
+
+            // Konversi object keranjang ke format array
+            let cartArray = [];
+            let totalQty = 0;
+
+            for (const [id, item] of Object.entries(keranjang)) {
+                cartArray.push({
+                    menu_id: id,
+                    qty: item.qty,
+                    harga_satuan: item.harga,
+                    subtotal: item.harga * item.qty
+                });
+                totalQty += item.qty;
+            }
+
+            let kembalian = uangBayar - totalTagihanGlobal;
+
+            // Validasi bayar kurang jika menggunakan Tunai/Cash
+            let metodeNama = selectElement.options[selectElement.selectedIndex].getAttribute('data-nama') || '';
+            if ((metodeNama.includes('cash') || metodeNama.includes('tunai')) && kembalian < 0) {
+                alert("Uang pembayaran kurang!");
+                return;
+            }
+
+            let dataTransaksi = {
+                metode_pembayaran_id: metodeId,
+                nama_customer: namaCustomer,
+                total_qty: totalQty,
+                subtotal: totalTagihanGlobal,
+                bayar: (metodeNama.includes('cash') || metodeNama.includes('tunai')) ? uangBayar : totalTagihanGlobal,
+                kembalian: kembalian >= 0 ? kembalian : 0,
+                cart: cartArray
+            };
+
+            // Ubah teks tombol jadi loading
+            let btnSimpan = document.querySelector('button.btn-success.fw-bold');
+            let textAsli = btnSimpan.innerHTML;
+            btnSimpan.innerHTML = "Memproses...";
+            btnSimpan.disabled = true;
+
+            fetch('{{ route('pos.store') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json', // <--- TAMBAHKAN BARIS INI
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(dataTransaksi)
+                })
+                // ... (kodingan fetch di atasnya tetap sama)
+                .then(response => {
+                    if (!response.ok && response.status !== 422) {
+                        throw new Error('Server error ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        // SweetAlert untuk Sukses
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Transaksi Berhasil!',
+                            html: `${data.message} <br> <strong>Nomor Struk: ${data.kode}</strong>`,
+                            confirmButtonColor: '#28a745',
+                            confirmButtonText: 'OK, Lanjut'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload(); // Halaman baru di-refresh SETELAH kasir klik OK
+                            }
+                        });
+                    } else {
+                        // SweetAlert untuk Gagal Validasi / Error Controller
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Transaksi Gagal',
+                            text: data.message,
+                            confirmButtonColor: '#dc3545',
+                        });
+                        btnSimpan.innerHTML = textAsli;
+                        btnSimpan.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error lengkapnya:', error);
+                    // SweetAlert untuk Error Sistem (Mati lampu, server down, dll)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Sistem Error!',
+                        text: 'Terjadi kesalahan jaringan atau server. Cek console untuk detailnya.',
+                        confirmButtonColor: '#dc3545',
+                    });
+                    btnSimpan.innerHTML = textAsli;
+                    btnSimpan.disabled = false;
+                });
         }
     </script>
 </x-template>

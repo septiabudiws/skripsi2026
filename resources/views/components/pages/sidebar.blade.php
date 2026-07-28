@@ -34,7 +34,7 @@
                 <li class="pc-item"><a href="/pos" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-shopping-cart-simple"></i>
                         </span><span class="pc-mtext" data-i18n="User">POS</span></a></li>
-                <li class="pc-item"><a href="#" class="pc-link"><span class="pc-micon"><i
+                <li class="pc-item"><a href="{{ route('transaksi.hari-ini') }}" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-notebook"></i>
                         </span><span class="pc-mtext" data-i18n="User">Pesanan Hari Ini</span></a></li>
         </div>

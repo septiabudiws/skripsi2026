@@ -12,4 +12,9 @@ class MetodePembayaran extends Model
         'nama_metode',
         'is_active',
     ];
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }
