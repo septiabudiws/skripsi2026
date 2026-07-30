@@ -14,11 +14,10 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         $kategori = [
-            'Minuman Panas',
             'Minuman Dingin',
-            'Camilan Goreng',
+            'Minuman Panas',
             'Makanan Utama',
-            'Minuman Tradisional'
+            'Camilan & Tambahan'
         ];
 
         foreach ($kategori as $item) {

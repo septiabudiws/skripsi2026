@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MetodePembayaranController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::middleware(['role:admin'])->group(function (){
 
     Route::patch('/karyawan/{id}/status', [UserController::class, 'updateStatus'])->name('karyawan.update-status');
     Route::put('/karyawan/{id}/permissions', [UserController::class, 'updatePermissions'])->name('karyawan.update-permissions');
+
+    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
 });
 
 Route::middleware(['permission:akses_kategori'])->group(function (){

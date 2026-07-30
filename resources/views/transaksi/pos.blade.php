@@ -19,24 +19,19 @@
                             @endforeach
                         </div>
                         <div class="row g-3" id="daftarMenu">
-                            <!-- Looping data menu dari database -->
                             @foreach ($menu as $item)
-                                <!-- Tambahkan class 'menu-item' dan atribut 'data-kategori' untuk trigger JavaScript -->
                                 <div class="col-md-4 col-sm-6 menu-item" data-kategori="{{ $item->kategori_id }}">
-                                    <!-- Tambahkan fungsi onclick untuk memindahkan data ke keranjang nanti -->
                                     <div class="card h-100 border shadow-sm pos-card" style="cursor: pointer;"
                                         onclick="tambahKeKeranjang({{ $item->id }}, '{{ $item->nama }}', {{ $item->harga }})">
 
                                         <div class="card-body p-3 d-flex flex-column">
                                             <div class="mb-2">
-                                                <!-- Memanggil nama kategori dari relasi (jika kosong, tampilkan 'Umum') -->
                                                 <span class="badge bg-light text-secondary border">
                                                     {{ $item->kategori->nama_kategori ?? 'Umum' }}
                                                 </span>
                                             </div>
                                             <h6 class="mb-1 text-dark lh-base">{{ $item->nama }}</h6>
                                             <div class="mt-auto pt-3">
-                                                <!-- Format angka menjadi format Rupiah standar (contoh: 15.000) -->
                                                 <h5 class="mb-0 text-primary fw-bold">Rp
                                                     {{ number_format($item->harga, 0, ',', '.') }}</h5>
                                             </div>
@@ -55,7 +50,6 @@
                                 placeholder="Nama Customer (Opsional)">
                             <select id="inputMetodeBayar" class="form-select form-select-sm">
                                 @foreach ($metodePembayaran as $metode)
-                                    <!-- Kita gunakan strtolower agar value-nya huruf kecil semua (contoh: 'tunai', 'qris') -->
                                     <option value="{{ $metode->id }}"
                                         data-nama="{{ strtolower($metode->nama_metode) }}">
                                         {{ $metode->nama_metode }}
@@ -64,7 +58,7 @@
                             </select>
                         </div>
                         <div class="mb-3 pe-2" id="daftarPesanan" style="max-height: 350px; overflow-y: auto;">
-                            <!-- Nanti JavaScript akan memasukkan daftar pesanan ke sini secara otomatis -->
+                            <!-- Daftar Pesanan -->
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between mb-3">

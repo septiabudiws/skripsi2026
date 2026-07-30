@@ -2,10 +2,9 @@
     <div class="footer-wrapper container-fluid">
         <div class="row">
             <div class="col-sm-6 my-1">
-                <p class="m-0">Made with &#9829; by Team <b>Septiabudi WS</b> & Powered by <a
-                        href="https://codedthemes.com/" target="_blank">CodedThemes</a></p>
+                <p class="m-0">Made with &#9829; by <b>Septiabudi WS</b>
             </div>
-            <div class="col-sm-6 ms-auto my-1">
+            {{-- <div class="col-sm-6 ms-auto my-1">
                 <ul class="list-inline footer-link mb-0 justify-content-sm-end d-flex">
                     <li class="list-inline-item"><a
                             href="https://html.phoenixcoded.net/light-able/bootstrap/default/index.html">Home</a>
@@ -15,7 +14,7 @@
                     <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/"
                             target="_blank">Support</a></li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
 </footer>

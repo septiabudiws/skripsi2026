@@ -29,12 +29,15 @@
                 <li class="pc-item"><a href="/karyawan" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-identification-card"></i>
                         </span><span class="pc-mtext" data-i18n="User">Karyawan</span></a></li>
+                <li class="pc-item"><a href="/ranking" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-list-numbers"></i>
+                        </span><span class="pc-mtext" data-i18n="User">Menu Optimal</span></a></li>
                 <li class="pc-item pc-caption"><label data-i18n="Navigation">Kasir</label> <i
                         class="ph-duotone ph-gauge"></i></li>
                 <li class="pc-item"><a href="/pos" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-shopping-cart-simple"></i>
                         </span><span class="pc-mtext" data-i18n="User">POS</span></a></li>
-                <li class="pc-item"><a href="{{ route('transaksi.hari-ini') }}" class="pc-link"><span class="pc-micon"><i
+                <li class="pc-item"><a href="/transaksi/hari-ini" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-notebook"></i>
                         </span><span class="pc-mtext" data-i18n="User">Pesanan Hari Ini</span></a></li>
         </div>

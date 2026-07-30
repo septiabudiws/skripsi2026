@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">Manajemen Karyawan</h4>
-                <a href="#" class="btn btn-primary btn-sm">Tambah Karyawan</a>
+                {{-- <a href="#" class="btn btn-primary btn-sm">Tambah Karyawan</a> --}}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,14 +40,14 @@
                                             data-bs-toggle="modal" data-bs-target="#modalAkses-{{ $item->id }}">
                                             Akses
                                         </button>
-                                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                        {{-- <a href="#" class="btn btn-warning btn-sm">Edit</a>
                                         <form action="#" method="POST" class="d-inline"
                                             id="delete-form-{{ $item->id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 onclick="confirmDelete({{ $item->id }})">Delete</button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                                 <div class="modal fade" id="modalAkses-{{ $item->id }}" tabindex="-1"
@@ -60,7 +60,8 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('karyawan.update-permissions', $item->id) }}" method="POST">
+                                            <form action="{{ route('karyawan.update-permissions', $item->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
@@ -111,4 +112,11 @@
             </div>
         </div>
     </div>
+    @push('script')
+        <script>
+            $(document).ready(function() {
+                $('#tabelData').DataTable();
+            });
+        </script>
+    @endpush
 </x-template>
