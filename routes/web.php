@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardCotroller;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MenuController;
@@ -25,9 +26,7 @@ Route::post('/reset-password', [AuthController::class, 'updateResetPassword'])->
 
 Route::middleware(['auth'])->group(function (){
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [DashboardCotroller::class, 'index'])->name('dashboard');
 
 Route::get('/profile', function () {
     return view('profile.profile');

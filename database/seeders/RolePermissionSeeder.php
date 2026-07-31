@@ -35,7 +35,7 @@ class RolePermissionSeeder extends Seeder
             // Akses Detail di dalam Dashboard (Contoh Granular)
             'lihat_ranking_menu_optimal',
             'lihat_produk_terlaris',
-            'lihat_change_password',
+            'lihat_chart',
             'lihat_permissions',
         ];
 
@@ -57,8 +57,6 @@ class RolePermissionSeeder extends Seeder
             'akses_pos',
             'akses_profile',
             'transaksi_selesai',
-            // Misalnya karyawan boleh lihat jumlah pesanan, tapi tidak boleh lihat grafik uang
-            'lihat_change_password',
         ]);
     }
 }

@@ -1,19 +1,19 @@
 <script data-cfasync="false" src="{{ asset('able') }}/cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{{ asset('able') }}/assets/js/plugins/apexcharts.min.js"></script>
-    <script src="{{ asset('able') }}/assets/js/plugins/jsvectormap.min.js"></script>
+    {{-- <script src="{{ asset('able') }}/assets/js/plugins/jsvectormap.min.js"></script>
     <script src="{{ asset('able') }}/assets/js/plugins/world.js"></script>
     <script src="{{ asset('able') }}/assets/js/plugins/world-merc.js"></script>
     <script src="{{ asset('able') }}/assets/js/widgets/earnings-users-chart.js"></script>
-    <script src="{{ asset('able') }}/assets/js/widgets/world-map-markers.js"></script><!--  --><!-- [Page Specific JS] end --><!-- Required Js -->
+    <script src="{{ asset('able') }}/assets/js/widgets/world-map-markers.js"></script><!--  --><!-- [Page Specific JS] end --><!-- Required Js --> --}}
     <script src="{{ asset('able') }}/assets/js/plugins/popper.min.js"></script>
     <script src="{{ asset('able') }}/assets/js/plugins/simplebar.min.js"></script>
     <script src="{{ asset('able') }}/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="{{ asset('able') }}/assets/js/plugins/i18next.min.js"></script>
-    <script src="{{ asset('able') }}/assets/js/plugins/i18nextHttpBackend.min.js"></script>
+    {{-- <script src="{{ asset('able') }}/assets/js/plugins/i18next.min.js"></script>
+    <script src="{{ asset('able') }}/assets/js/plugins/i18nextHttpBackend.min.js"></script> --}}
     <script src="{{ asset('able') }}/assets/js/icon/custom-font.js"></script>
     <script src="{{ asset('able') }}/assets/js/script.js"></script>
     <script src="{{ asset('able') }}/assets/js/theme.js"></script>
-    <script src="{{ asset('able') }}/assets/js/multi-lang.js"></script>
+    {{-- <script src="{{ asset('able') }}/assets/js/multi-lang.js"></script> --}}
     <script src="{{ asset('able') }}/assets/js/plugins/feather.min.js"></script>
 
     <script src="{{ asset('able') }}/assets/js/sweetalert2.all.min.js"></script>
