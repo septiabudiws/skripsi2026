@@ -32,6 +32,9 @@
                 <li class="pc-item"><a href="/ranking" class="pc-link"><span class="pc-micon"><i
                                 class="ph-duotone ph-list-numbers"></i>
                         </span><span class="pc-mtext" data-i18n="User">Menu Optimal</span></a></li>
+                <li class="pc-item"><a href="/rekap" class="pc-link"><span class="pc-micon"><i
+                                class="ph-duotone ph-book"></i>
+                        </span><span class="pc-mtext" data-i18n="User">Rekapitulasi</span></a></li>
                 <li class="pc-item pc-caption"><label data-i18n="Navigation">Kasir</label> <i
                         class="ph-duotone ph-gauge"></i></li>
                 <li class="pc-item"><a href="/pos" class="pc-link"><span class="pc-micon"><i
