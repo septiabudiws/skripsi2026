@@ -43,24 +43,19 @@ class UserController extends Controller
 
     public function changePassword(Request $request)
     {
-        // 1. Validasi input
         $request->validate([
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // 2. Update password di database
         $user = auth()->user();
         $user->password = Hash::make($request->password);
         $user->save();
 
-        // 3. LOGOUT OTOMATIS
-        Auth::logout(); // Mengeluarkan user dari sistem
+        Auth::logout();
 
-        // Menghapus session lama untuk keamanan tambahan
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // 4. Redirect ke halaman Login
         return redirect()->route('login')->with('success', 'Password berhasil diubah! Silakan login kembali menggunakan password baru Anda.');
     }
 }

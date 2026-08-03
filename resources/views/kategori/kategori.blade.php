@@ -50,16 +50,20 @@
 
             function confirmDelete(id) {
                 Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: "Data kategori ini akan dihapus secara permanen!",
+                    title: 'Peringatan Keras!',
+                    html: `Menghapus kategori ini akan <b>menghapus seluruh Menu</b> yang ada di dalamnya.<br><br>
+               <span style="color: red; font-weight: bold;">Dampak Fatal:</span><br>
+               Seluruh riwayat <b>Transaksi Penjualan</b> yang terkait dengan menu tersebut dan <b>Data Perhitungan ARAS</b> juga bisa ikut terhapus atau mengalami kerusakan!<br><br>
+               Apakah Anda benar-benar yakin?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
+                    confirmButtonText: 'Ya, Hapus Permanen!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true // Membalik posisi tombol agar 'Batal' di kanan (mencegah salah klik)
                 }).then((result) => {
-                    // Jika user mengklik "Ya, hapus!"
+                    // Jika user mengklik "Ya, Hapus Permanen!"
                     if (result.isConfirmed) {
                         // Jalankan proses submit pada form yang sesuai dengan ID
                         document.getElementById('delete-form-' + id).submit();

@@ -62,14 +62,18 @@
 
             function confirmDelete(id) {
                 Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: "Data metode pembayaran ini akan dihapus secara permanen!",
+                    title: 'Peringatan Hapus Metode Pembayaran!',
+                    html: `Menghapus metode pembayaran ini akan berdampak pada riwayat kasir.<br><br>
+               <span style="color: red; font-weight: bold;">Dampak Fatal:</span><br>
+               Seluruh <b>Riwayat Transaksi</b> dan <b>Laporan Rekapitulasi</b> yang menggunakan metode pembayaran ini akan kehilangan referensi datanya dan berisiko mengalami error!<br><br>
+               Apakah Anda benar-benar yakin ingin menghapusnya?`,
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true // Membalik posisi tombol agar 'Batal' di kanan (mencegah salah klik)
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('delete-form-' + id).submit();

@@ -37,7 +37,7 @@ class DashboardCotroller extends Controller
         $labelPendapatan = [];
         $dataPendapatan = [];
 
-        // Ambil data 7 hari terakhir dalam 1x Query (Jauh lebih cepat dari sebelumnya)
+        // Ambil data 7 hari terakhir
         $tujuhHariLalu = Carbon::today()->subDays(6);
         $transaksiMingguan = TransaksiModel::whereDate('created_at', '>=', $tujuhHariLalu)
             ->selectRaw('DATE(created_at) as tanggal, SUM(subtotal) as total')

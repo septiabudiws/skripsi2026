@@ -101,7 +101,6 @@ class RekapitulasiController extends Controller
         // Setting ukuran kertas A4 Portrait
         $pdf->setPaper('A4', 'portrait');
 
-        // Gunakan stream() agar file terbuka di tab baru (preview) sebelum didownload
         return $pdf->stream('Laporan-Penjualan-Warkop-' . date('Ymd-Hi') . '.pdf');
     }
 }

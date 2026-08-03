@@ -17,14 +17,12 @@ class RankingController extends Controller
 
         $tahunSekarang = date('Y');
 
-        // Tangkap pilihan filter dari form blade (jika belum milih, nilainya akan null)
+        // Tangkap pilihan filter dari form blade
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
-        // Panggil logika perhitungan ARAS dari service
         $hasilAras = $arasService->hitungPerankingan($bulan, $tahun);
 
-        // Kirim semua variabel ke view ranking.blade.php
         return view('ranking.ranking', compact('bulanIndo', 'tahunSekarang', 'hasilAras', 'bulan', 'tahun'));
     }
 }

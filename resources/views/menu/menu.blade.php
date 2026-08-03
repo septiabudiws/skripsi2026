@@ -47,27 +47,31 @@
     </div>
 
     @push('script')
-    <script>
-        $(document).ready(function() {
-            $('#tabelMenu').DataTable();
-        });
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data menu ini akan dihapus secara permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + id).submit();
-                }
+        <script>
+            $(document).ready(function() {
+                $('#tabelMenu').DataTable();
             });
-        }
-    </script>
+
+            function confirmDelete(id) {
+                Swal.fire({
+                    title: 'Peringatan Hapus Menu!',
+                    html: `Menghapus menu ini akan berdampak pada data terkait secara permanen.<br><br>
+               <span style="color: red; font-weight: bold;">Dampak Fatal:</span><br>
+               Data <b>Riwayat Transaksi</b> yang memuat pesanan menu ini serta <b>Data Perhitungan ARAS</b> (sebagai alternatif) akan ikut terhapus atau mengalami kerusakan!<br><br>
+               Apakah Anda benar-benar yakin ingin menghapusnya?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus Menu!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true // Tombol Batal di kanan untuk mencegah human error
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+            }
+        </script>
     @endpush
 </x-template>

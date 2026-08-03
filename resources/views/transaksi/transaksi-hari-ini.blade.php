@@ -2,7 +2,7 @@
     <div class="col-md-12 col-xl-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">Pesanan Transaksi Hari Ini</h4>
+                <h4 class="mb-0">Pesanan Hari Ini</h4>
                 <a href="{{ route('pos') }}" class="btn btn-primary btn-sm">Kembali ke POS</a>
             </div>
             <div class="card-body">

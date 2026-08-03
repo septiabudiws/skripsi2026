@@ -14,11 +14,8 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        // Bersihkan cache Spatie agar tidak terjadi error duplikat saat dijalankan ulang
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // 1. DAFTAR PERMISSION (Hak Akses)
-        // Kita bedakan antara akses menu utama dan akses detail di dalam dashboard
         $permissions = [
             // Akses Sidebar Menu
             'akses_dashboard',
@@ -39,24 +36,20 @@ class RolePermissionSeeder extends Seeder
             'lihat_permissions',
         ];
 
-        // Masukkan semua permission ke dalam database
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
 
-        // 2. PEMBUATAN ROLE DAN PEMBAGIAN PERMISSION
-
-        // ROLE ADMIN: Diberikan semua akses tanpa terkecuali (Sapu Jagat)
         $roleAdmin = Role::create(['name' => 'admin']);
         $roleAdmin->givePermissionTo(Permission::all());
 
-        // ROLE KARYAWAN: Hanya diberikan akses menu tertentu
         $roleKaryawan = Role::create(['name' => 'karyawan']);
         $roleKaryawan->givePermissionTo([
             'akses_dashboard',
             'akses_pos',
             'akses_profile',
             'transaksi_selesai',
+            'akses_metode_pembayaran',
         ]);
     }
 }

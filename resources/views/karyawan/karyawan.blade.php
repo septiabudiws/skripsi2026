@@ -87,7 +87,7 @@
                                                         <input class="form-check-input" type="checkbox" role="switch"
                                                             name="permissions[]" value="akses_metode_pembayaran"
                                                             {{ $item->hasPermissionTo('akses_metode_pembayaran') ? 'checked' : '' }}>
-                                                        <label class="form-check-label">Akses Pembayaran</label>
+                                                        <label class="form-check-label">Akses Metode Pembayaran</label>
                                                     </div>
                                                     <div class="form-check form-switch mb-3">
                                                         <input class="form-check-input" type="checkbox" role="switch"
