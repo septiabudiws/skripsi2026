@@ -1,4 +1,4 @@
-<x-auth>
+<x-auth title="Register | Warkop Garasi">
     <div class="card my-5">
         <div class="card-body">
             <div class="text-center"><img src="{{ asset('able') }}/assets/images/authentication/img-auth-register2.png"

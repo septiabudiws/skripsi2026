@@ -1,4 +1,4 @@
-<x-auth>
+<x-auth title="Login | Warkop Garasi">
     <div class="card my-5">
         <div class="card-body">
 

@@ -1,4 +1,4 @@
-<x-auth>
+<x-auth title="Reset Password | Warkop Garasi">
     <div class="card my-5">
         <div class="card-body">
             <div class="text-center"><img

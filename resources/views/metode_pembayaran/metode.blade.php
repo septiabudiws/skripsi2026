@@ -1,4 +1,4 @@
-<x-template>
+<x-template title="Manajemen Metode Pembayaran | Warkop Garasi">
     <div class="col-md-12 col-xl-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">

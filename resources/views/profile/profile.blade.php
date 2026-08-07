@@ -1,4 +1,4 @@
-<x-template>
+<x-template title="Profile | Warkop Garasi">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-lg-5 col-xxl-3">
@@ -12,7 +12,7 @@
                             <p class="text-muted text-sm">{{ Auth::user()->username }}</p>
                             <div class="row g-3 justify-content-center">
                                 <div class="col-4 border border-top-0 border-bottom-0 text-center">
-                                    <h5 class="mb-0">40</h5><small class="text-muted">Transaksi</small>
+                                    <h5 class="mb-0">{{ \App\Models\TransaksiModel::where('user_id', auth()->user()->id)->count() }}</h5><small class="text-muted">Transaksi</small>
                                 </div>
                             </div>
                         </div>

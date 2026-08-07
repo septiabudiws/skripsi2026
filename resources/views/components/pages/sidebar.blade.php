@@ -3,8 +3,7 @@
         <div class="m-header"><a href="/"
                 class="b-brand text-primary"><!-- ========   Change your logo from here   ============ --> <img
                     src="https://html.phoenixcoded.net/light-able/bootstrap/default/assets/images/logo-dark.svg"
-                    alt="logo image" class="logo-lg"> <span
-                    class="badge bg-brand-color-2 rounded-pill ms-1 theme-version">v1.3.0</span></a></div>
+                    alt="logo image" class="logo-lg"></a></div>
         <div class="navbar-content">
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption"><label data-i18n="Navigation">Menu</label> <i

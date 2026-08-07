@@ -1,4 +1,4 @@
-<x-template>
+<x-template title="Rekapitulasi Penjualan | Warkop Garasi">
     <!-- BARIS RINGKASAN KEUANGAN -->
     <div class="row mb-4">
         <div class="col-md-3">
