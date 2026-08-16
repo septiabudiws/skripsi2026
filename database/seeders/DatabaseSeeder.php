@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             MetodePembayaranSeeder::class,
             KriteriaSeeder::class,
-            TransaksiExcelSeeder::class
+            TransaksiExcelSeeder::class,
+            // TransaksiHariIniSeeder::class,
         ]);
     }
 }

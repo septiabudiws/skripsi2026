@@ -19,17 +19,22 @@ class DashboardCotroller extends Controller
         $hariIni = Carbon::today();
 
         $hasilAras = $arasService->hitungPerankingan($bulan, $tahun);
-        $namaMenuOptimal = isset($hasilAras[1]) ? $hasilAras[1]['nama_menu'] : 'Belum Ada Data';
+        // Pastikan hasil perhitungan tidak kosong dan memiliki step5
+        if (!empty($hasilAras) && isset($hasilAras['step5'])) {
+            $juara1 = collect($hasilAras['step5'])->firstWhere('rank', 1);
 
-        $totalMenu         = Menu::count();
-        $totalKategori     = Kategori::count();
-        $transaksiHariIni  = TransaksiModel::whereDate('created_at', $hariIni)->count();
+            // Ambil nama menunya jika juara 1 ditemukan
+            $namaMenuOptimal = $juara1 ? $juara1['nama_menu'] : 'Belum Ada Data';
+        } else {
+            $namaMenuOptimal = 'Belum Ada Data';
+        }
+
+        $totalMenu = Menu::count();
+        $totalKategori = Kategori::count();
+        $transaksiHariIni = TransaksiModel::whereDate('created_at', $hariIni)->count();
         $pendapatanHariIni = TransaksiModel::whereDate('created_at', $hariIni)->sum('subtotal');
 
-        $transaksiTerbaru  = TransaksiModel::whereDate('created_at', $hariIni)
-                                ->latest()
-                                ->take(3)
-                                ->get();
+        $transaksiTerbaru = TransaksiModel::whereDate('created_at', $hariIni)->latest()->take(3)->get();
 
         // =======================================================
         // 4. DATA DINAMIS TREN PENDAPATAN (OPTIMASI QUERY)
@@ -39,10 +44,7 @@ class DashboardCotroller extends Controller
 
         // Ambil data 7 hari terakhir
         $tujuhHariLalu = Carbon::today()->subDays(6);
-        $transaksiMingguan = TransaksiModel::whereDate('created_at', '>=', $tujuhHariLalu)
-            ->selectRaw('DATE(created_at) as tanggal, SUM(subtotal) as total')
-            ->groupBy('tanggal')
-            ->pluck('total', 'tanggal');
+        $transaksiMingguan = TransaksiModel::whereDate('created_at', '>=', $tujuhHariLalu)->selectRaw('DATE(created_at) as tanggal, SUM(subtotal) as total')->groupBy('tanggal')->pluck('total', 'tanggal');
 
         // Menyusun array untuk chart ApexCharts
         for ($i = 6; $i >= 0; $i--) {
@@ -59,30 +61,13 @@ class DashboardCotroller extends Controller
         $labelKategori = [];
         $dataKategori = [];
 
-        $kategoriPenjualan = DB::table('kategori')
-            ->leftJoin('menu', 'kategori.id', '=', 'menu.kategori_id')
-            ->leftJoin('detail_transaksi', 'menu.id', '=', 'detail_transaksi.menu_id')
-            ->select('kategori.nama_kategori', DB::raw('COALESCE(SUM(detail_transaksi.qty), 0) as total_terjual'))
-            ->groupBy('kategori.id', 'kategori.nama_kategori')
-            ->havingRaw('total_terjual > 0')
-            ->get();
+        $kategoriPenjualan = DB::table('kategori')->leftJoin('menu', 'kategori.id', '=', 'menu.kategori_id')->leftJoin('detail_transaksi', 'menu.id', '=', 'detail_transaksi.menu_id')->select('kategori.nama_kategori', DB::raw('COALESCE(SUM(detail_transaksi.qty), 0) as total_terjual'))->groupBy('kategori.id', 'kategori.nama_kategori')->havingRaw('total_terjual > 0')->get();
 
         foreach ($kategoriPenjualan as $kp) {
             $labelKategori[] = $kp->nama_kategori;
-            $dataKategori[]  = (int) $kp->total_terjual;
+            $dataKategori[] = (int) $kp->total_terjual;
         }
 
-        return view('dashboard', compact(
-            'namaMenuOptimal',
-            'totalMenu',
-            'totalKategori',
-            'transaksiHariIni',
-            'pendapatanHariIni',
-            'transaksiTerbaru',
-            'labelPendapatan',
-            'dataPendapatan',
-            'labelKategori',
-            'dataKategori'
-        ));
+        return view('dashboard', compact('namaMenuOptimal', 'totalMenu', 'totalKategori', 'transaksiHariIni', 'pendapatanHariIni', 'transaksiTerbaru', 'labelPendapatan', 'dataPendapatan', 'labelKategori', 'dataKategori'));
     }
 }

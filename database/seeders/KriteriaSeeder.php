@@ -17,25 +17,25 @@ class KriteriaSeeder extends Seeder
             [
                 'kode_kriteria' => 'C1',
                 'nama_kriteria' => 'Profit',
-                'bobot_kriteria'         => 0.50,
+                'bobot_kriteria'         => 0.520833,
                 'tipe_kriteria'         => 'benefit'
             ],
             [
                 'kode_kriteria' => 'C2',
                 'nama_kriteria' => 'Margin Profit',
-                'bobot_kriteria'         => 0.30,
+                'bobot_kriteria'         => 0.270833,
                 'tipe_kriteria'         => 'benefit'
             ],
             [
                 'kode_kriteria' => 'C3',
                 'nama_kriteria' => 'Kuantitas',
-                'bobot_kriteria'         => 0.10,
+                'bobot_kriteria'         => 0.145833,
                 'tipe_kriteria'         => 'benefit'
             ],
             [
                 'kode_kriteria' => 'C4',
                 'nama_kriteria' => 'Harga',
-                'bobot_kriteria'         => 0.10,
+                'bobot_kriteria'         => 0.0625,
                 'tipe_kriteria'         => 'cost'
             ],
         ];

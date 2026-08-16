@@ -12,7 +12,6 @@ class RekapitulasiController extends Controller
 {
     public function index(Request $request)
     {
-        // TAMBAHAN: Kita panggil juga relasi detailTransaksi dan menu-nya
         $query = TransaksiModel::with(['user', 'metodePembayaran', 'detailTransaksi.menu']);
 
         if ($request->filled('user_id')) {

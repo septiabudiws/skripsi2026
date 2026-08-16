@@ -17,7 +17,6 @@ class RankingController extends Controller
 
         $tahunSekarang = date('Y');
 
-        // Tangkap pilihan filter dari form blade
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 

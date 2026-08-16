@@ -25,7 +25,7 @@
                     </div>
                     <div class="mb-3"><label class="form-label">Bobot</label><input type="number"
                             class="form-control @error('bobot') is-invalid @enderror" name="bobot" placeholder="Bobot"
-                            step="0.01" value="{{ old('bobot') }}">
+                            step="any" value="{{ old('bobot') }}">
                         @error('bobot')
                             <div class="invalid-feedback">
                                 {{ $message }}

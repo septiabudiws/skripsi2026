@@ -11,8 +11,9 @@ class KriteriaController extends Controller
     public function index(){
 
         $kriteria = Kriteria::all();
+        $totalBobot = round($kriteria->sum('bobot_kriteria'), 4);
 
-        return view('kriteria.kriteria', compact('kriteria'));
+        return view('kriteria.kriteria', compact('kriteria', 'totalBobot'));
     }
 
     public function create(){

@@ -94,7 +94,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($transaksi ?? [] as $index => $trx)
+                            @foreach ($transaksi ?? [] as $index => $trx)
                                 <tr>
                                     <td style="text-align: center;">{{ $index + 1 }}</td>
                                     <td>#TRX-{{ str_pad($trx->id, 5, '0', STR_PAD_LEFT) }}</td>
@@ -126,12 +126,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center text-muted py-4">Belum ada data transaksi pada
-                                        periode ini.</td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -220,7 +215,9 @@
     @push('script')
         <script>
             $(document).ready(function() {
+                // 1. Inisialisasi DataTables (Digabung menjadi satu)
                 $('#tabelData').DataTable({
+                    "destroy": true, // Mencegah error reinitialise
                     "language": {
                         "search": "Cari Struk:",
                         "lengthMenu": "Tampilkan _MENU_ data",
@@ -230,9 +227,21 @@
                             "last": "Akhir",
                             "next": "Lanjut",
                             "previous": "Mundur"
-                        }
+                        },
+                        "emptyTable": "Data tidak ditemukan." // Digabung ke sini
                     }
                 });
+
+                // 2. Logika SweetAlert jika data kosong
+                @if ($transaksi->isEmpty())
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Perhatian',
+                        text: 'Silakan tentukan rentang tanggal terlebih dahulu untuk menampilkan data rekapitulasi.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Mengerti'
+                    });
+                @endif
             });
         </script>
     @endpush

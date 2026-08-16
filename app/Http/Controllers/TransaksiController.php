@@ -27,10 +27,8 @@ class TransaksiController extends Controller
     {
         DB::beginTransaction();
         try {
-            // Generate kode struk otomatis
             $kodeTransaksi = 'TRX-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -5));
 
-            // Simpan tabel induk
             $transaksi = TransaksiModel::create([
                 'kode_transaksi' => $kodeTransaksi,
                 'user_id' => Auth::id(),
@@ -42,7 +40,6 @@ class TransaksiController extends Controller
                 'kembalian' => $request->kembalian,
             ]);
 
-            // Simpan tabel detail (looping keranjang)
             foreach ($request->cart as $item) {
                 DetailTransaksi::create([
                     'transaksi_id' => $transaksi->id,

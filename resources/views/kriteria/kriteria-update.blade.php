@@ -27,7 +27,7 @@
                         @enderror
                     </div>
                     <div class="mb-3"><label class="form-label">Bobot</label><input type="number"
-                            class="form-control @error('bobot') is-invalid @enderror" placeholder="Bobot" step="0.01"
+                            class="form-control @error('bobot') is-invalid @enderror" placeholder="Bobot" step="any"
                             value="{{ old('bobot', $kriteria->bobot_kriteria) }}" name="bobot">
                         @error('bobot')
                             <div class="invalid-feedback">
